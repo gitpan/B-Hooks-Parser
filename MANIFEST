@@ -17,6 +17,7 @@ META.yml
 Parser.xs
 ppport.h
 README
+stolen_chunk_of_toke.c
 t/basic.t
 t/set_linestr.t
 xt/author/pod.t
