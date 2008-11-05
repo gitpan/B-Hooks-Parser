@@ -8,7 +8,11 @@ DESCRIPTION
 Perl API
   setup()
     Does some initialization work. This must be called before any other
-    functions of this module if you intend to use "set_linestr".
+    functions of this module if you intend to use "set_linestr". Returns an
+    id that can be used to disable the magic using "teardown".
+
+  teardown($id)
+    Disables magic registed using "setup".
 
   get_linestr()
     Returns the line the parser is currently working on, or undef if perl
@@ -29,7 +33,8 @@ Perl API
 C API
     The following functions work just like their equivalent in the perl api.
 
-  void hook_parser_setup (void)
+  hook_op_check_id hook_parser_setup (void)
+  void hook_parser_teardown (hook_op_check_id id)
   const char *hook_parser_get_linestr (pTHX)
   IV hook_parser_get_linestr_offset (pTHX)
   hook_parser_set_linestr (pTHX_ const char *new_value)

@@ -4,8 +4,10 @@ author:
   - 'Florian Ragwitz <rafl@debian.org>'
 build_requires:
   B::Hooks::EndOfScope: 0
+  B::Hooks::OP::Check: 0
   Test::Exception: 0
 configure_requires:
+  B::Hooks::OP::Check: 0
   ExtUtils::Depends: 0
 distribution_type: module
 generated_by: 'Module::Install version 0.77'
@@ -19,7 +21,8 @@ no_index:
     - inc
     - t
 requires:
+  B::Hooks::OP::Check: 0
   parent: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.04
+version: 0.05
