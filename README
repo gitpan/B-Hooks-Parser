@@ -30,6 +30,11 @@ Perl API
 
     Throws an exception when nothing is being compiled.
 
+  inject($string)
+    Convenience function to insert a piece of perl code into the current
+    line string (as returned by "get_linestr") at the current offset (as
+    returned by "get_linestr_offset").
+
 C API
     The following functions work just like their equivalent in the perl api.
 
