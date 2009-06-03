@@ -20,5 +20,6 @@ README
 stolen_chunk_of_toke.c
 t/basic.t
 t/set_linestr.t
+t/toke.t
 xt/author/pod.t
 xt/author/podcoverage.t
