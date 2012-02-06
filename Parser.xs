@@ -37,7 +37,7 @@ hook_parser_get_linestr_offset (pTHX) {
 
 void
 hook_parser_set_linestr (pTHX_ const char *new_value) {
-	int new_len;
+	STRLEN new_len;
 
 	if (NOT_PARSING) {
         croak ("trying to alter PL_linestr at runtime");
@@ -45,12 +45,10 @@ hook_parser_set_linestr (pTHX_ const char *new_value) {
 
 	new_len = strlen (new_value);
 
-	if (SvLEN (PL_linestr) < new_len) {
+	if (SvLEN (PL_linestr) < new_len+1) {
 		croak ("forced to realloc PL_linestr for line %s,"
 		       " bailing out before we crash harder", SvPVX (PL_linestr));
 	}
-
-	SvGROW (PL_linestr, new_len);
 
 	Copy (new_value, SvPVX (PL_linestr), new_len + 1, char);
 
@@ -105,6 +103,7 @@ grow_eval_sv (pTHX) {
 
 STATIC OP *
 check_eval (pTHX_ OP *op, void *user_data) {
+	PERL_UNUSED_VAR(user_data);
 	if (op->op_ppaddr == PL_ppaddr[OP_ENTEREVAL]) {
 		op->op_ppaddr = grow_eval_sv;
 	}
@@ -184,10 +183,16 @@ void
 hook_parser_teardown (id)
 	UV id
 
-const char *
+SV *
 hook_parser_get_linestr ()
-	C_ARGS:
-		aTHX
+CODE:
+	if (NOT_PARSING) {
+		RETVAL = &PL_sv_undef;
+	} else {
+		RETVAL = newSVsv (PL_linestr);
+	}
+OUTPUT:
+	RETVAL
 
 IV
 hook_parser_get_linestr_offset ()
@@ -195,15 +200,32 @@ hook_parser_get_linestr_offset ()
 		aTHX
 
 void
-hook_parser_set_linestr (new_value)
-		const char *new_value
-	C_ARGS:
-		aTHX_ new_value
+hook_parser_set_linestr (SV *new_value)
+PREINIT:
+	char *new_chars;
+	STRLEN new_len;
+CODE:
+	if (NOT_PARSING) {
+		croak ("trying to alter PL_linestr at runtime");
+	}
+	new_chars = SvPV(new_value, new_len);
+	if (SvLEN (PL_linestr) < new_len+1) {
+		croak ("forced to realloc PL_linestr for line %s,"
+		       " bailing out before we crash harder", SvPVX (PL_linestr));
+	}
+	Copy (new_chars, SvPVX (PL_linestr), new_len + 1, char);
+	SvCUR_set (PL_linestr, new_len);
+	PL_bufend = SvPVX(PL_linestr) + new_len;
 
-const char *
+SV *
 hook_parser_get_lex_stuff ()
-	C_ARGS:
-		aTHX
+CODE:
+	if (NOT_PARSING || !PL_lex_stuff) {
+		RETVAL = &PL_sv_undef;
+	}
+	RETVAL = newSVsv (PL_lex_stuff);
+OUTPUT:
+	RETVAL
 
 void
 hook_parser_clear_lex_stuff ()

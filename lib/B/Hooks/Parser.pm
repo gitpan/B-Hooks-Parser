@@ -6,7 +6,7 @@ package B::Hooks::Parser;
 use B::Hooks::OP::Check;
 use parent qw/DynaLoader/;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 sub dl_load_flags { 0x01 }
 
@@ -79,7 +79,8 @@ C<get_linestr_offset>).
 
 =head1 C API
 
-The following functions work just like their equivalent in the perl api.
+The following functions work just like their equivalent in the Perl API,
+except that they can't handle embedded NUL bytes in strings.
 
 =head2 hook_op_check_id hook_parser_setup (void)
 
