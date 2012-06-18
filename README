@@ -35,6 +35,17 @@ Perl API
     line string (as returned by "get_linestr") at the current offset (as
     returned by "get_linestr_offset").
 
+  get_lex_stuff()
+
+    Returns the string of additional stuff resulting from recent lexing
+    that is being held onto by the lexer.  For example, the content of a
+    quoted string goes here.  Returns C<undef> if there is no such stuff.
+
+  clear_lex_stuff()
+
+    Discard the string of additional stuff resulting from recent lexing
+    that is being held onto by the lexer.
+
 C API
     The following functions work just like their equivalent in the Perl API,
     except that they can't handle embedded NUL bytes in strings.
@@ -43,7 +54,9 @@ C API
   void hook_parser_teardown (hook_op_check_id id)
   const char *hook_parser_get_linestr (pTHX)
   IV hook_parser_get_linestr_offset (pTHX)
-  hook_parser_set_linestr (pTHX_ const char *new_value)
+  void hook_parser_set_linestr (pTHX_ const char *new_value)
+  char *hook_parser_get_lex_stuff (pTHX)
+  void hook_parser_clear_lex_stuff (pTHX)
 AUTHOR
     Florian Ragwitz <rafl@debian.org>
 
