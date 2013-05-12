@@ -1,18 +1,19 @@
 ---
-abstract: 'Interface to perls parser variables'
+abstract: "Interface to perl's parser variables"
 author:
   - 'Florian Ragwitz <rafl@debian.org>'
 build_requires:
   B::Hooks::EndOfScope: 0
   B::Hooks::OP::Check: 0
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.36
   Test::Exception: 0
 configure_requires:
-  B::Hooks::OP::Check: 0
-  ExtUtils::Depends: 0
-  ExtUtils::MakeMaker: 6.42
+  B::Hooks::OP::Check: 0.18
+  ExtUtils::Depends: 0.302
+  ExtUtils::MakeMaker: 6.36
 distribution_type: module
-generated_by: 'Module::Install version 0.91'
+dynamic_config: 1
+generated_by: 'Module::Install version 1.06'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -29,5 +30,5 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=B-Hooks-Parser
   license: http://dev.perl.org/licenses/
-  repository: git://lake.fysh.org/zefram/B-Hooks-Parser.git
-version: 0.11
+  repository: git://github.com/karenetheridge/B-Hooks-Parser.git
+version: 0.12

@@ -7,6 +7,7 @@ inc/Module/Install/ExtraTests.pm
 inc/Module/Install/Fetch.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
+inc/Module/Install/Repository.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/B/Hooks/Parser.pm
@@ -16,7 +17,6 @@ MANIFEST.SKIP
 META.yml
 Parser.xs
 ppport.h
-README
 stolen_chunk_of_toke.c
 t/basic.t
 t/set_linestr.t

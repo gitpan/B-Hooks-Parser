@@ -6,7 +6,7 @@ package B::Hooks::Parser;
 use B::Hooks::OP::Check;
 use parent qw/DynaLoader/;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 sub dl_load_flags { 0x01 }
 
@@ -33,7 +33,7 @@ __END__
 
 =head1 NAME
 
-B::Hooks::Parser - Interface to perls parser variables
+B::Hooks::Parser - Interface to perl's parser variables
 
 =head1 DESCRIPTION
 
